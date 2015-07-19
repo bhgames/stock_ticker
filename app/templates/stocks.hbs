@@ -1,0 +1,18 @@
+{{input value=query }}
+
+Full
+{{#each model as |m|}}
+  {{m.symbol}}
+{{/each}}
+
+{{#if query}}
+  <p>Displaying results for "{{query}}"</p>
+  
+  <ul>
+    {{#each filteredStocks as |m|}}
+      <li>{{m.symbol}}</li>
+    {{/each}}     
+  </ul>
+{{/if}}
+
+{{outlet}}
