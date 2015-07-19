@@ -1,16 +1,18 @@
 {{input value=query }}
 
-Full
-{{#each model as |m|}}
-  {{m.symbol}}
-{{/each}}
+Graph:
+
+{{currentStock.symbol}}
+{{currentHistory}}
+
+{{daily-graph histories=currentHistory}}
 
 {{#if query}}
   <p>Displaying results for "{{query}}"</p>
   
   <ul>
-    {{#each filteredStocks as |m|}}
-      <li>{{m.symbol}}</li>
+    {{#each model as |s|}}
+      <li><a {{action "draw" s}}>{{s.name}} - {{s.symbol}}</a></li>
     {{/each}}     
   </ul>
 {{/if}}
