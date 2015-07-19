@@ -1,10 +1,6 @@
 export default Ember.Component.extend({
    tagName: 'svg',
   
-  parseDate: function(d) {
-    return d3.time.format('%c')(d3.time.format('%Y-%m-%d').parse(d));
-  },
-
   draw: function(){
     console.log("Draw");
     console.log(this.get('history'));
@@ -12,7 +8,7 @@ export default Ember.Component.extend({
     var dates = [];
     var averages = [];
     var histories = this.get('histories')
-    var that = this;
+
     if(histories) {
       histories.forEach(function(history) {
         dates.push(history.get('id'));
@@ -53,26 +49,28 @@ export default Ember.Component.extend({
             var margin = {top: 20, right: 80, bottom: 30, left: 50}, 
                 innerwidth = width - margin.left - margin.right,
                 innerheight = height - margin.top - margin.bottom ;
-            
-            var x_scale = d3.time.scale().domain([new Date(datasets[datasets.length-1]), new Date(datasets[0])]).range([0, width]);
-          //  var x_scale = d3.scale.linear()
-            //    .range([0, innerwidth])
-                
-               // .domain([ d3.min(datasets, function(d) { return d3.min(d.x); }), 
-                       //   d3.max(datasets, function(d) { return d3.max(d.x); }) ]) ;
+           
+
+         //   var x_scale = d3.scale.linear()
+           //     .range([0, innerwidth])
+             //   .domain([ d3.min(datasets, function(d) { return d3.min(d.x); }), 
+               //           d3.max(datasets, function(d) { return d3.max(d.x); }) ]) ;
             
             var y_scale = d3.scale.linear()
                 .range([innerheight, 0])
                 .domain([ d3.min(datasets, function(d) { return d3.min(d.y); }),
                           d3.max(datasets, function(d) { return d3.max(d.y); }) ]) ;
 
+            var x_scale = d3.scale.ordinal().rangeRoundBands([0, width]);
+            var x_axis = d3.svg.axis().scale(x_scale).orient("bottom");
+            x_scale.domain(datasets[0].x);
+
             var color_scale = d3.scale.category10()
                 .domain(d3.range(datasets.length)) ;
 
-            var x_axis = d3.svg.axis()
-                .scale(x_scale)
-                .orient("bottom")
-                .tickFormat(d3.time.format("%Y-%m-%d")) ;
+         //   var x_axis = d3.svg.axis()
+           //     .scale(x_scale)
+             //   .orient("bottom") ;
 
             var y_axis = d3.svg.axis()
                 .scale(y_scale)
