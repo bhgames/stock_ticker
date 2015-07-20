@@ -16,13 +16,20 @@ end
 
 get '/histories' do
   content_type :json
-  data = YahooFinance.historical_quotes(params[:id], { start_date: Time::now-(24*60*60*30), end_date: Time::now }).map do |d|
-    avg = (d.high.to_f + d.low.to_f + d.close.to_f + d.open.to_f)/4.0
-    {
-      average: avg,
-      date: d.trade_date,
-      id: d.trade_date # Just so I dont need to actually store anything, unique as anything else
-    }
+
+  begin
+    data = YahooFinance.historical_quotes(params[:stock_id], { start_date: Time::now-(24*60*60*30), end_date: Time::now }).map do |d|
+      avg = (d.high.to_f + d.low.to_f + d.close.to_f + d.open.to_f)/4.0
+      date = d.trade_date.split("-")[1..2].join("-")
+      {
+        average: avg,
+        date: date,
+        stock_id: params[:stock_id],
+        id: params[:stock_id] + "-" + date # Need a unique id for ember data to work, this is a unique data pice.
+      }
+    end
+  rescue OpenURI::HTTPError
+    data = []
   end
 
   { "history" => data }.to_json

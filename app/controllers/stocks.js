@@ -8,7 +8,8 @@ export default Ember.Controller.extend({
     draw: function(stock){
       this.set('currentStock', stock);
       var that = this;
-      this.store.find('history', { id: stock.id }).then(function(data) {
+      this.store.query('history', { stock_id: stock.get('id') }).then(function(data) {
+        stock.set('histories', data);
         that.set('currentHistory', data);
       });
     }
