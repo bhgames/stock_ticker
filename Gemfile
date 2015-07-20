@@ -1,3 +1,4 @@
+source 'https://rubygems.org'
 gem 'yahoo-finance'
 gem 'sinatra'
 gem 'httparty'
