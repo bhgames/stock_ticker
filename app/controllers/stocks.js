@@ -9,7 +9,9 @@ export default Ember.Controller.extend({
       this.set('currentStock', stock);
       var that = this;
       this.store.query('history', { stock_id: stock.get('id') }).then(function(data) {
-        stock.set('histories', data);
+        // TODO not sure why stock.get('histories') returns nothing after this set,
+        // so use currentHistory var instead until fix is found
+        //stock.set('histories', data);
         that.set('currentHistory', data);
       });
     }

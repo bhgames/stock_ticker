@@ -12,11 +12,9 @@ export default Ember.Component.extend({
 
     var histories = this.get('histories');
 
-    console.log(histories);
     if(histories) {
 
       histories.forEach(function(history) {
-        console.log(history.get('date'));
         dates.push(history.get('date'));
         averages.push(history.get('average'));
       })
