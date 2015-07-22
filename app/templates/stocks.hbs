@@ -1,22 +1,16 @@
 {{input value=query }}
 
-Graph:
-
-{{daily-graph histories=currentHistory stock=currentStock}}
-
 {{#if query}}
   <p>Displaying results for "{{query}}"</p>
-  
-  {{#em-list}}
-    {{#each model as |s|}}
-      {{#em-list-item}}<a {{action "draw" s}}>{{s.name}} - {{s.symbol}}</a>{{/em-list-item}}
-    {{/each}}     
-  {{/em-list}}
+
   <ul>
     {{#each model as |s|}}
       <li><a {{action "draw" s}}>{{s.name}} - {{s.symbol}}</a></li>
     {{/each}}     
   </ul>
 {{/if}}
+<br />
 
+{{sorry-message histories=currentHistory stock=currentStock}}
+{{daily-graph histories=currentHistory stock=currentStock}}
 {{outlet}}

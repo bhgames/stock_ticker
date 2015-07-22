@@ -11,8 +11,7 @@ export default Ember.Component.extend({
     }
 
     var histories = this.get('histories');
-
-    if(histories) {
+    if(histories && histories.get('length') > 0) {
 
       histories.forEach(function(history) {
         dates.push(history.get('date'));

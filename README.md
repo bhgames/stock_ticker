@@ -20,11 +20,11 @@ You will need the following things properly installed on your computer.
 * `npm install`
 * `bower install`
 * `bower install ember-components`
-* bundle
+* `bundle`
 
 ## Running / Development
 
-* `ember server --proxy http://localhost:4567`
+* `ember server --proxy http://localhost:4567 --watcher=polling`
 * in another window, `ruby backend.rb`
 * Visit your app at [http://localhost:4200](http://localhost:4200).
 
