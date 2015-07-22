@@ -1,7 +1,12 @@
 # Stock-ticker
 
-This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
+This is my first ever Ember JS app. It uses a Sinatra backend to hit two different Yahoo API endpoints,
+one for stock suggestion and the other for historical data. 
+
+Instead of sorting companies by name, since I am using the stock suggestion API, I order them as they
+come back from the API because I figure this is in sorting order of apparent importance to the search algo.
+
+And indeed, in using it, it does appear most relevant matches at the top.
 
 ## Prerequisites
 
