@@ -32,6 +32,8 @@ export default Ember.Component.extend({
       var svg = d3.select("svg")
           .datum(data)
           .call(xy_chart) ;
+    } else {
+      this.$().empty();
     }
 
   }.observes('stock'),
